@@ -1,0 +1,494 @@
+/* 训练计划编辑页面样式 */
+
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.back-btn, .save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn {
+    background-color: #f0f0f0;
+    color: #555;
+}
+
+.back-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.save-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+/* 计划名称编辑区域 */
+.plan-name-section {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.name-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name-display h2 {
+    font-size: 28px;
+    color: #333;
+    font-weight: 600;
+}
+
+.rename-btn {
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.rename-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.name-input {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.name-input input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: border-color 0.3s ease;
+}
+
+.name-input input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.name-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.name-actions button:first-child {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 10px;
+}
+
+.name-actions button:first-child:hover {
+    background-color: #45a049;
+}
+
+.name-actions button:last-child {
+    background-color: #f0f0f0;
+    color: #555;
+}
+
+.name-actions button:last-child:hover {
+    background-color: #e0e0e0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 星期编辑区域 */
+.week-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.day-editor {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.day-editor:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+}
+
+.day-header h3 {
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+.day-type-toggle {
+    display: flex;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.toggle-btn {
+    padding: 8px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.toggle-btn.training-day:hover:not(.active) {
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.toggle-btn.rest-day:hover:not(.active) {
+    background-color: rgba(255, 87, 34, 0.1);
+}
+
+.toggle-btn.rest-day.active {
+    background-color: #FF5722;
+}
+
+/* 训练日内容 */
+.day-content {
+    padding: 25px;
+}
+
+.body-parts h4, .exercises-section h4 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.parts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.part-btn {
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.part-btn:hover {
+    border-color: #4CAF50;
+    color: #4CAF50;
+    transform: translateY(-1px);
+}
+
+.part-btn.selected {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+}
+
+/* 动作选择区域 */
+.exercises-section {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.exercises-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.exercise-group {
+    margin-bottom: 20px;
+}
+
+.exercise-group-title {
+    font-weight: 600;
+    color: #4CAF50;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #4CAF50;
+}
+
+.exercises-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.exercise-btn {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+}
+
+.exercise-btn:hover {
+    border-color: #4CAF50;
+    color: #4CAF50;
+}
+
+.exercise-btn.selected {
+    background-color: #e8f5e9;
+    border-color: #4CAF50;
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+/* 休息日消息 */
+.rest-day-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 25px;
+    color: #FF5722;
+}
+
+.rest-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.rest-day-message p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* 提示消息 */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: slideIn 0.3s ease, slideOut 0.3s ease 2.7s forwards;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast i {
+    font-size: 20px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .header {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .back-btn, .save-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .name-display {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .name-input {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .day-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .parts-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .exercises-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .toast {
+        left: 15px;
+        right: 15px;
+        top: auto;
+        bottom: 20px;
+        animation: slideUp 0.3s ease, slideDown 0.3s ease 2.7s forwards;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .parts-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .exercises-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toggle-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
