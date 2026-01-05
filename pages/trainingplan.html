@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑训练计划</title>
+    <link rel="stylesheet" href="../css/trainingplan.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fa fa-arrow-left"></i> 返回
+                </button>
+            </div>
+            <div class="header-center">
+                <h1>编辑训练计划</h1>
+            </div>
+            <div class="header-right">
+                <button class="save-btn" onclick="savePlan()">保存计划</button>
+            </div>
+        </header>
+
+        <div class="plan-editor">
+            <!-- 计划名称编辑 -->
+            <div class="plan-name-section">
+                <div class="name-display">
+                    <h2 id="plan-name-display">新训练计划</h2>
+                    <button class="rename-btn" onclick="toggleRename()">
+                        <i class="fa fa-pencil"></i> 重命名
+                    </button>
+                </div>
+                <div class="name-input hidden">
+                    <input type="text" id="plan-name-input" placeholder="输入计划名称">
+                    <div class="name-actions">
+                        <button onclick="confirmRename()">确认</button>
+                        <button onclick="cancelRename()">取消</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 星期设置区域 -->
+            <div class="week-editor">
+                <div class="day-editor" data-day="星期一">
+                    <div class="day-header">
+                        <h3>星期一</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day active" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <!-- 部位选择 -->
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+
+                        <!-- 动作选择区域 -->
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期一">
+                                <!-- 动作选择将在这里动态生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message hidden">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+
+                <div class="day-editor" data-day="星期二">
+                    <div class="day-header">
+                        <h3>星期二</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day active" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期二">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message hidden">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+
+                <div class="day-editor" data-day="星期三">
+                    <div class="day-header">
+                        <h3>星期三</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day active" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期三">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+
+                <div class="day-editor" data-day="星期四">
+                    <div class="day-header">
+                        <h3>星期四</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day active" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期四">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message hidden">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+
+                <div class="day-editor" data-day="星期五">
+                    <div class="day-header">
+                        <h3>星期五</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day active" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期五">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message hidden">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+
+                <div class="day-editor" data-day="星期六">
+                    <div class="day-header">
+                        <h3>星期六</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day active" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期六">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message hidden">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+
+                <div class="day-editor" data-day="星期日">
+                    <div class="day-header">
+                        <h3>星期日</h3>
+                        <div class="day-type-toggle">
+                            <button class="toggle-btn training-day" data-type="training">训练日</button>
+                            <button class="toggle-btn rest-day active" data-type="rest">休息日</button>
+                        </div>
+                    </div>
+                    <div class="day-content">
+                        <div class="body-parts">
+                            <h4>选择训练部位</h4>
+                            <div class="parts-grid">
+                                <button class="part-btn" data-part="shoulders">肩</button>
+                                <button class="part-btn" data-part="chest">胸</button>
+                                <button class="part-btn" data-part="back">背</button>
+                                <button class="part-btn" data-part="triceps">肱三头</button>
+                                <button class="part-btn" data-part="biceps">肱二头</button>
+                                <button class="part-btn" data-part="core">核心</button>
+                                <button class="part-btn" data-part="glutes">臀</button>
+                                <button class="part-btn" data-part="legs">腿</button>
+                                <button class="part-btn" data-part="cardio">有氧</button>
+                            </div>
+                        </div>
+                        <div class="exercises-section hidden">
+                            <h4>选择训练动作</h4>
+                            <div class="exercises-container" id="exercises-星期日">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rest-day-message">
+                        <div class="rest-icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <p>休息日</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 保存成功提示 -->
+    <div id="save-success" class="toast hidden">
+        <div class="toast-content">
+            <i class="fa fa-check-circle"></i>
+            <span>计划保存成功！</span>
+        </div>
+    </div>
+
+    <script src="../js/trainingplan.js"></script>
+</body>
+</html>
