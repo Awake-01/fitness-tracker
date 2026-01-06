@@ -1,5 +1,3 @@
-// 健身记录工具主逻辑
-
 // 全局变量
 let currentPage = 'realtime';
 let currentExerciseIndex = -1;
