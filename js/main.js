@@ -180,8 +180,17 @@ function setupEventListeners() {
     document.getElementById('cancel-update').addEventListener('click', hideModal);
     document.getElementById('confirm-update').addEventListener('click', function() {
         console.log('Confirm button clicked');
-        // 直接调用confirmWeightUpdate，它能处理所有类型的训练项目
-        confirmWeightUpdate();
+        // 根据当前打开的弹窗类型调用相应的确认函数
+        const plans = JSON.parse(localStorage.getItem('fitnessPlans'));
+        const currentPlanData = plans.find(plan => plan.name === currentPlan);
+        const dayOfWeek = getDayOfWeek();
+        const exercise = currentPlanData.exercises[dayOfWeek][currentExerciseIndex];
+        
+        if (exercise && exercise.isCardio) {
+            confirmCardioUpdate();
+        } else {
+            confirmWeightUpdate();
+        }
     });
     
     // 点击弹窗外部关闭弹窗
@@ -942,6 +951,19 @@ function formatDate(dateString) {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}年${month}月${day}日`;
+}
+
+// 格式化日期显示
+function formatDateDisplay(input) {
+    if (input.value) {
+        const date = new Date(input.value);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        // 这里我们不修改input.value，因为浏览器会自动处理日期格式
+        // 但我们可以在显示时使用中文格式
+        console.log('Selected date:', `${year}年${month}月${day}日`);
+    }
 }
 
 // 启动应用
