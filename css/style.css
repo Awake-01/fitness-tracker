@@ -252,6 +252,12 @@ h3 {
     box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
 }
 
+.exercise-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .set-list {
     display: flex;
     flex-direction: column;
