@@ -7,6 +7,77 @@ let currentSetIndex = -1;
 let currentPlan = '';
 let today = new Date();
 
+// 训练项目类型定义
+const exerciseTypes = {
+    WEIGHT: 'weight',     // 重量训练（kg）
+    COUNT: 'count',       // 计数训练（个）
+    TIME: 'time',         // 计时训练（秒）
+    CARDIO: 'cardio'      // 有氧训练（分钟）
+};
+
+// 训练项目计量单位映射
+const exerciseUnitMap = {
+    // 肩部训练
+    '杠铃肩推': exerciseTypes.WEIGHT,
+    '哑铃肩推': exerciseTypes.WEIGHT,
+    '侧平举': exerciseTypes.WEIGHT,
+    '前平举': exerciseTypes.WEIGHT,
+    '俯身飞鸟': exerciseTypes.WEIGHT,
+    '反向蝴蝶机': exerciseTypes.WEIGHT,
+    '站姿哑铃推举': exerciseTypes.WEIGHT,
+    
+    // 胸部训练
+    '平板杠铃卧推': exerciseTypes.WEIGHT,
+    '上斜哑铃卧推': exerciseTypes.WEIGHT,
+    '平板哑铃飞鸟': exerciseTypes.WEIGHT,
+    '俯卧撑': exerciseTypes.COUNT,
+    '蝴蝶机夹胸': exerciseTypes.WEIGHT,
+    '绳索夹胸': exerciseTypes.WEIGHT,
+    
+    // 背部训练
+    '引体向上': exerciseTypes.COUNT,
+    '高位下拉': exerciseTypes.WEIGHT,
+    '杠铃划船': exerciseTypes.WEIGHT,
+    '哑铃单臂划船': exerciseTypes.WEIGHT,
+    '坐姿绳索划船': exerciseTypes.WEIGHT,
+    
+    // 肱三头训练
+    '哑铃颈后臂屈伸': exerciseTypes.WEIGHT,
+    '绳索三头下压': exerciseTypes.WEIGHT,
+    '窄距卧推': exerciseTypes.WEIGHT,
+    
+    // 肱二头训练
+    '杠铃弯举': exerciseTypes.WEIGHT,
+    '哑铃交替弯举': exerciseTypes.WEIGHT,
+    '绳索弯举': exerciseTypes.WEIGHT,
+    '反握引体向上': exerciseTypes.COUNT,
+    
+    // 核心训练
+    '平板支撑': exerciseTypes.TIME,
+    '侧平板支撑': exerciseTypes.TIME,
+    '卷腹': exerciseTypes.COUNT,
+    '反向卷腹': exerciseTypes.COUNT,
+    '仰卧起坐': exerciseTypes.COUNT,
+    '俄罗斯转体': exerciseTypes.COUNT,
+    '登山跑': exerciseTypes.TIME,
+    
+    // 臀部训练
+    '杠铃深蹲': exerciseTypes.WEIGHT,
+    '臀桥': exerciseTypes.WEIGHT,
+    '腿举': exerciseTypes.WEIGHT,
+    
+    // 腿部训练
+    '杠铃深蹲': exerciseTypes.WEIGHT,
+    '腿举': exerciseTypes.WEIGHT,
+    
+    // 有氧训练
+    '跑步机': exerciseTypes.CARDIO,
+    '椭圆机': exerciseTypes.CARDIO,
+    
+    // 默认类型
+    'default': exerciseTypes.WEIGHT
+};
+
 // 默认训练计划
 const defaultWeeklyPlan = {
     name: '默认计划',
@@ -110,12 +181,9 @@ function setupEventListeners() {
     // 弹窗按钮点击事件
     document.getElementById('cancel-update').addEventListener('click', hideModal);
     document.getElementById('confirm-update').addEventListener('click', function() {
-        // 根据弹窗内容判断是有氧项目还是力量训练项目
-        if (document.getElementById('duration-input')) {
-            confirmCardioUpdate();
-        } else {
-            confirmWeightUpdate();
-        }
+        console.log('Confirm button clicked');
+        // 直接调用confirmWeightUpdate，它能处理所有类型的训练项目
+        confirmWeightUpdate();
     });
     
     // 点击弹窗外部关闭弹窗
@@ -196,9 +264,12 @@ function loadTodayTraining() {
             <div class="exercise-card">
                 <div class="exercise-header">
                     <h3>${exercise.name}</h3>
-                    ${exercise.isCardio ? '' : `<button class="complete-all-btn" onclick="completeAllSets(${exerciseIndex})">
-                        <i class="fa fa-check-circle"></i> 一键完成
-                    </button>`}
+                    <div class="exercise-actions">
+
+                        ${exercise.isCardio ? '' : `<button class="complete-all-btn" onclick="completeAllSets(${exerciseIndex})">
+                            <i class="fa fa-check-circle"></i> 一键完成
+                        </button>`}
+                    </div>
                 </div>
                 <div class="set-list">
         `;
@@ -206,8 +277,8 @@ function loadTodayTraining() {
         if (exercise.isCardio) {
             // 有氧项目特殊显示
             const isCompleted = todayRecords[exercise.name] !== undefined;
-            const duration = isCompleted ? todayRecords[exercise.name].duration : exercise.duration || 30;
-            const pace = isCompleted ? todayRecords[exercise.name].pace : exercise.pace || '中等';
+            const duration = isCompleted && todayRecords && todayRecords[exercise.name] ? todayRecords[exercise.name].duration : exercise.duration || 30;
+            const pace = isCompleted && todayRecords && todayRecords[exercise.name] ? todayRecords[exercise.name].pace : exercise.pace || '中等';
             
             html += `
                 <div class="cardio-item ${isCompleted ? 'completed' : ''}">
@@ -215,27 +286,34 @@ function loadTodayTraining() {
                         <span class="cardio-duration">${duration} 分钟</span>
                         <span class="cardio-pace">配速: ${pace}</span>
                     </div>
-                    <button class="complete-btn" onclick="openCardioModal(${exerciseIndex})" ${isCompleted ? 'disabled' : ''}>
+                    <button class="complete-btn" onclick="openCardioModal(${exerciseIndex})">
                         ${isCompleted ? '已完成' : '完成'}
                     </button>
                 </div>
             `;
         } else {
-            // 力量训练项目
+            // 根据项目类型显示不同的内容
+            const exerciseType = getExerciseType(exercise.name);
+            
             for (let i = 0; i < exercise.sets; i++) {
                 const setNumber = i + 1;
                 const isCompleted = todayRecords[exercise.name] && todayRecords[exercise.name][i] !== undefined;
-                const weight = isCompleted ? todayRecords[exercise.name][i] : exercise.lastWeights[i] || 0;
-                const lastWeight = exercise.lastWeights[i] || 0;
+                const value = isCompleted ? todayRecords[exercise.name][i] : exercise.lastWeights[i] || 0;
+                const lastValue = exercise.lastWeights[i] || 0;
+                const unit = getExerciseUnit(exercise.name);
+                
+                // 直接使用数值显示
+                let displayValue = value;
+                let displayLastValue = lastValue;
                 
                 html += `
                     <div class="set-item ${isCompleted ? 'completed' : ''}">
                         <div class="set-info">
                             <span class="set-number">第${setNumber}组</span>
-                            <span class="set-weight">${weight} kg</span>
-                            ${!isCompleted && lastWeight > 0 ? `<span class="last-weight">上次: ${lastWeight} kg</span>` : ''}
+                            <span class="set-weight">${displayValue} ${unit}</span>
+                            ${!isCompleted && lastValue > 0 ? `<span class="last-weight">上次: ${displayLastValue} ${unit}</span>` : ''}
                         </div>
-                        <button class="complete-btn" onclick="openUpdateModal(${exerciseIndex}, ${i})" ${isCompleted ? 'disabled' : ''}>
+                        <button class="complete-btn" onclick="openUpdateModal(${exerciseIndex}, ${i})">
                             ${isCompleted ? '已完成' : '完成'}
                         </button>
                     </div>
@@ -262,13 +340,31 @@ function openUpdateModal(exerciseIndex, setIndex) {
     const dayOfWeek = getDayOfWeek();
     const exercise = currentPlanData.exercises[dayOfWeek][exerciseIndex];
     
+    // 获取训练项目类型和单位
+    const exerciseType = getExerciseType(exercise.name);
+    const unit = getExerciseUnit(exercise.name);
+    
     // 设置弹窗内容
     document.getElementById('exercise-info').textContent = `${exercise.name} 第${setIndex + 1}组`;
-    document.getElementById('weight-input').value = exercise.lastWeights[setIndex] || 0;
+    
+    // 确保输入框元素存在
+    const inputGroup = document.querySelector('.input-group');
+    inputGroup.innerHTML = `
+        <label for="weight-input">数值 (<span id="weight-unit">${unit}</span>)</label>
+        <input type="number" id="weight-input" min="0" step="0.5">
+    `;
+    
+    // 设置输入框
+    const weightInput = document.getElementById('weight-input');
+    const lastValue = exercise.lastWeights[setIndex] || 0;
+    
+    // 直接显示数值
+    weightInput.value = lastValue;
+    weightInput.placeholder = `请输入${unit === 'kg' ? '重量' : unit === '个' ? '个数' : unit === '秒' ? '秒数' : '数值'}`;
     
     // 显示弹窗
     document.getElementById('update-weight-modal').classList.remove('hidden');
-    document.getElementById('weight-input').focus();
+    weightInput.focus();
 }
 
 // 隐藏弹窗
@@ -278,42 +374,54 @@ function hideModal() {
     currentSetIndex = -1;
 }
 
-// 确认重量更新
+// 确认更新
 function confirmWeightUpdate() {
-    const weight = parseFloat(document.getElementById('weight-input').value);
+    const inputValue = document.getElementById('weight-input').value;
     
-    if (isNaN(weight) || weight < 0) {
-        alert('请输入有效的重量');
+    // 获取训练项目类型
+    const plans = JSON.parse(localStorage.getItem('fitnessPlans'));
+    const currentPlanData = plans.find(plan => plan.name === currentPlan);
+    const dayOfWeek = getDayOfWeek();
+    const exercise = currentPlanData.exercises[dayOfWeek][currentExerciseIndex];
+    const exerciseType = getExerciseType(exercise.name);
+    
+    let value;
+    
+    // 直接解析数值
+    value = parseFloat(inputValue);
+    
+    // 验证输入值
+    if (isNaN(value) || value < 0) {
+        alert(`请输入有效的${exerciseType === exerciseTypes.COUNT ? '个数' : exerciseType === exerciseTypes.TIME ? '秒数' : '数值'}`);
         return;
+    }
+    
+    // 计数类型确保是整数
+    if (exerciseType === exerciseTypes.COUNT) {
+        value = Math.floor(value);
     }
     
     // 更新今日训练记录
     const todayKey = getTodayKey();
     const todayRecords = JSON.parse(localStorage.getItem(todayKey));
     
-    const plans = JSON.parse(localStorage.getItem('fitnessPlans'));
-    const currentPlanData = plans.find(plan => plan.name === currentPlan);
-    const dayOfWeek = getDayOfWeek();
-    const exercise = currentPlanData.exercises[dayOfWeek][currentExerciseIndex];
-    
     // 确保该运动的记录数组存在
     if (!todayRecords[exercise.name]) {
         todayRecords[exercise.name] = [];
     }
     
-    // 更新重量
-    todayRecords[exercise.name][currentSetIndex] = weight;
+    // 更新记录
+    todayRecords[exercise.name][currentSetIndex] = value;
     localStorage.setItem(todayKey, JSON.stringify(todayRecords));
     
     // 更新运动的最后重量记录
-    exercise.lastWeights[currentSetIndex] = weight;
+    exercise.lastWeights[currentSetIndex] = value;
     
     // 保存更新后的计划
     localStorage.setItem('fitnessPlans', JSON.stringify(plans));
     
     // 如果所有组都完成了，添加到历史记录
     checkAndAddToHistory();
-    
     // 隐藏弹窗并重新加载今日训练
     hideModal();
     loadTodayTraining();
@@ -334,10 +442,23 @@ function completeAllSets(exerciseIndex) {
         todayRecords[exercise.name] = [];
     }
     
-    // 使用上次的重量一键完成所有组
+    // 获取训练项目类型
+    const exerciseType = getExerciseType(exercise.name);
+    
+    // 根据项目类型一键完成所有组
     for (let i = 0; i < exercise.sets; i++) {
-        const lastWeight = exercise.lastWeights[i] || 0;
-        todayRecords[exercise.name][i] = lastWeight;
+        const lastValue = exercise.lastWeights[i] || 0;
+        
+        if (exerciseType === exerciseTypes.TIME) {
+            // 时间类型：使用默认值或上次值
+            todayRecords[exercise.name][i] = lastValue > 0 ? lastValue : 60; // 默认1分钟
+        } else if (exerciseType === exerciseTypes.COUNT) {
+            // 计数类型：使用默认值或上次值
+            todayRecords[exercise.name][i] = lastValue > 0 ? lastValue : 10; // 默认10个
+        } else {
+            // 重量类型：使用上次重量
+            todayRecords[exercise.name][i] = lastValue;
+        }
     }
     
     localStorage.setItem(todayKey, JSON.stringify(todayRecords));
@@ -361,12 +482,13 @@ function openCardioModal(exerciseIndex) {
     // 设置弹窗内容
     document.getElementById('exercise-info').textContent = exercise.name;
     
-    // 显示有氧项目专用的输入字段
-    document.querySelector('.input-group').innerHTML = `
-        <label for="duration-input">时间 (分钟)</label>
-        <input type="number" id="duration-input" min="1" max="300" value="${exercise.duration || 30}">
-        <label for="pace-input" style="margin-top: 15px;">配速</label>
-        <select id="pace-input">
+    // 使用统一的弹窗结构
+    const inputGroup = document.querySelector('.input-group');
+    inputGroup.innerHTML = `
+        <label for="weight-input">时间 (<span id="weight-unit">分钟</span>)</label>
+        <input type="number" id="weight-input" min="1" max="300" value="${exercise.duration || 30}">
+        <label for="pace-input" style="margin-top: 15px; display: block;">配速</label>
+        <select id="pace-input" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin-top: 5px;">
             <option value="慢" ${(exercise.pace || '中等') === '慢' ? 'selected' : ''}>慢</option>
             <option value="中等" ${(exercise.pace || '中等') === '中等' ? 'selected' : ''}>中等</option>
             <option value="快" ${(exercise.pace || '中等') === '快' ? 'selected' : ''}>快</option>
@@ -375,12 +497,12 @@ function openCardioModal(exerciseIndex) {
     
     // 显示弹窗
     document.getElementById('update-weight-modal').classList.remove('hidden');
-    document.getElementById('duration-input').focus();
+    document.getElementById('weight-input').focus();
 }
 
 // 确认有氧项目更新
 function confirmCardioUpdate() {
-    const duration = parseInt(document.getElementById('duration-input').value);
+    const duration = parseInt(document.getElementById('weight-input').value);
     const pace = document.getElementById('pace-input').value;
     
     if (isNaN(duration) || duration < 1) {
@@ -414,7 +536,6 @@ function confirmCardioUpdate() {
     
     // 如果所有项目都完成了，添加到历史记录
     checkAndAddToHistory();
-    
     // 隐藏弹窗并重新加载今日训练
     hideModal();
     loadTodayTraining();
@@ -474,6 +595,7 @@ function checkAndAddToHistory() {
                 const exerciseRecord = {
                     name: exercise.name,
                     isCardio: false,
+                    type: getExerciseType(exercise.name),
                     sets: []
                 };
                 
@@ -540,9 +662,12 @@ function loadTrainingHistory() {
             } else {
                 // 力量训练项目显示
                 exercise.sets.forEach(set => {
+                    // 使用训练项目名称获取单位，确保准确性
+                    const exerciseType = getExerciseType(exercise.name);
+                    const unit = exerciseType === exerciseTypes.COUNT ? '个' : exerciseType === exerciseTypes.TIME ? '秒' : 'kg';
                     html += `
                         <div class="set-record">
-                            <span>第${set.number}组: ${set.weight} kg</span>
+                            <span>第${set.number}组: ${set.weight} ${unit}</span>
                         </div>
                     `;
                 });
@@ -653,9 +778,12 @@ function applyFilter() {
             } else {
                 // 力量训练项目显示
                 exercise.sets.forEach(set => {
+                    // 使用训练项目名称获取单位，确保准确性
+                    const exerciseType = getExerciseType(exercise.name);
+                    const unit = exerciseType === exerciseTypes.COUNT ? '个' : exerciseType === exerciseTypes.TIME ? '秒' : 'kg';
                     html += `
                         <div class="set-record">
-                            <span>第${set.number}组: ${set.weight} kg</span>
+                            <span>第${set.number}组: ${set.weight} ${unit}</span>
                         </div>
                     `;
                 });
@@ -784,6 +912,28 @@ function deletePlan(planName) {
         if (currentPage === 'realtime') {
             loadTodayTraining();
         }
+    }
+}
+
+// 获取训练项目类型
+function getExerciseType(exerciseName) {
+    return exerciseUnitMap[exerciseName] || exerciseUnitMap.default;
+}
+
+// 获取训练项目单位
+function getExerciseUnit(exerciseName) {
+    const type = getExerciseType(exerciseName);
+    switch (type) {
+        case exerciseTypes.WEIGHT:
+            return 'kg';
+        case exerciseTypes.COUNT:
+            return '个';
+        case exerciseTypes.TIME:
+            return '秒';
+        case exerciseTypes.CARDIO:
+            return '分钟';
+        default:
+            return 'kg';
     }
 }
 
