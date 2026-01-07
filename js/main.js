@@ -172,6 +172,13 @@ function setupEventListeners() {
     // 筛选按钮点击事件
     document.getElementById('apply-filter').addEventListener('click', applyFilter);
     
+    // 数据导出导入按钮点击事件
+    document.getElementById('export-data').addEventListener('click', exportData);
+    document.getElementById('import-data').addEventListener('click', function() {
+        document.getElementById('file-input').click();
+    });
+    document.getElementById('file-input').addEventListener('change', importData);
+    
     // 创建计划按钮点击事件
     document.getElementById('create-plan-btn').addEventListener('click', createNewPlan);
     document.getElementById('create-first-plan').addEventListener('click', createNewPlan);
@@ -965,6 +972,140 @@ function formatDateDisplay(input) {
         console.log('Selected date:', `${year}年${month}月${day}日`);
     }
 }
+
+// 导入数据
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            
+            // 验证数据格式
+            if (!validateImportedData(importedData)) {
+                alert('导入失败：数据格式不正确');
+                return;
+            }
+            
+            // 确认是否覆盖现有数据
+            if (confirm('导入数据将覆盖现有数据，是否继续？')) {
+                // 清空现有数据
+                clearAllData();
+                
+                // 导入新数据
+                Object.keys(importedData).forEach(key => {
+                    localStorage.setItem(key, JSON.stringify(importedData[key]));
+                });
+                
+                alert('数据导入成功！');
+                // 重新加载页面数据
+                loadHistoryRecords();
+                loadTodayRecord();
+                loadPlans();
+            }
+        } catch (error) {
+            alert('导入失败：文件格式错误或文件已损坏');
+            console.error('Import error:', error);
+        }
+    };
+    
+    reader.readAsText(file);
+    // 重置文件输入，允许重新选择同一文件
+    event.target.value = '';
+}
+
+// 验证导入的数据格式
+function validateImportedData(data) {
+    if (typeof data !== 'object' || data === null) {
+        return false;
+    }
+    
+    // 检查是否包含必要的数据结构
+    const hasRequiredStructure = data.fitnessPlans && 
+                               Array.isArray(data.fitnessPlans) &&
+                               typeof data.currentPlan === 'string';
+    
+    // 检查历史记录格式
+    const hasValidHistory = Object.keys(data).every(key => {
+        if (key.startsWith('fitness_')) {
+            const datePattern = /^fitness_\d{4}-\d{2}-\d{2}$/;
+            return datePattern.test(key);
+        }
+        return true;
+    });
+    
+    return hasRequiredStructure && hasValidHistory;
+}
+
+// 清空所有数据
+function clearAllData() {
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('fitness_') || key === 'fitnessPlans' || key === 'currentPlan') {
+            keysToRemove.push(key);
+        }
+    }
+    
+    keysToRemove.forEach(key => {
+        localStorage.removeItem(key);
+    });
+}
+
+// 导出数据
+function exportData() {
+    try {
+        // 收集所有健身相关数据
+        const exportData = {};
+        
+        // 获取训练计划
+        const fitnessPlans = JSON.parse(localStorage.getItem('fitnessPlans') || '[]');
+        const currentPlan = localStorage.getItem('currentPlan') || '';
+        
+        exportData.fitnessPlans = fitnessPlans;
+        exportData.currentPlan = currentPlan;
+        
+        // 获取所有历史记录
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith('fitness_')) {
+                try {
+                    exportData[key] = JSON.parse(localStorage.getItem(key));
+                } catch (e) {
+                    console.warn(`Failed to parse ${key}:`, e);
+                }
+            }
+        }
+        
+        // 创建JSON文件
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        
+        // 创建下载链接
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `fitness-data-${new Date().toISOString().split('T')[0]}.json`;
+        
+        // 触发下载
+        document.body.appendChild(link);
+        link.click();
+        
+        // 清理
+        setTimeout(() => {
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, 100);
+        
+        alert('数据导出成功！');
+    } catch (error) {
+        alert('导出失败：' + error.message);
+        console.error('Export error:', error);
+    }
+}
+
 
 // 启动应用
 document.addEventListener('DOMContentLoaded', initApp);
