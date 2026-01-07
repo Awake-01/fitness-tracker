@@ -15,63 +15,17 @@ const exerciseTypes = {
 
 // 训练项目计量单位映射
 const exerciseUnitMap = {
-    // 肩部训练
-    '杠铃肩推': exerciseTypes.WEIGHT,
-    '哑铃肩推': exerciseTypes.WEIGHT,
-    '侧平举': exerciseTypes.WEIGHT,
-    '前平举': exerciseTypes.WEIGHT,
-    '俯身飞鸟': exerciseTypes.WEIGHT,
-    '反向蝴蝶机': exerciseTypes.WEIGHT,
-    '站姿哑铃推举': exerciseTypes.WEIGHT,
-    
-    // 胸部训练
-    '平板杠铃卧推': exerciseTypes.WEIGHT,
-    '上斜哑铃卧推': exerciseTypes.WEIGHT,
-    '平板哑铃飞鸟': exerciseTypes.WEIGHT,
+    // 计数训练
     '俯卧撑': exerciseTypes.COUNT,
-    '蝴蝶机夹胸': exerciseTypes.WEIGHT,
-    '绳索夹胸': exerciseTypes.WEIGHT,
-    
-    // 背部训练
     '引体向上': exerciseTypes.COUNT,
-    '高位下拉': exerciseTypes.WEIGHT,
-    '杠铃划船': exerciseTypes.WEIGHT,
-    '哑铃单臂划船': exerciseTypes.WEIGHT,
-    '坐姿绳索划船': exerciseTypes.WEIGHT,
-    
-    // 肱三头训练
-    '哑铃颈后臂屈伸': exerciseTypes.WEIGHT,
-    '绳索三头下压': exerciseTypes.WEIGHT,
-    '窄距卧推': exerciseTypes.WEIGHT,
-    
-    // 肱二头训练
-    '杠铃弯举': exerciseTypes.WEIGHT,
-    '哑铃交替弯举': exerciseTypes.WEIGHT,
-    '绳索弯举': exerciseTypes.WEIGHT,
     '反握引体向上': exerciseTypes.COUNT,
-    
-    // 核心训练
+    // 计时训练
     '平板支撑': exerciseTypes.TIME,
     '侧平板支撑': exerciseTypes.TIME,
-    '卷腹': exerciseTypes.COUNT,
-    '反向卷腹': exerciseTypes.COUNT,
-    '仰卧起坐': exerciseTypes.COUNT,
-    '俄罗斯转体': exerciseTypes.COUNT,
     '登山跑': exerciseTypes.TIME,
-    
-    // 臀部训练
-    '杠铃深蹲': exerciseTypes.WEIGHT,
-    '臀桥': exerciseTypes.WEIGHT,
-    '腿举': exerciseTypes.WEIGHT,
-    
-    // 腿部训练
-    '杠铃深蹲': exerciseTypes.WEIGHT,
-    '腿举': exerciseTypes.WEIGHT,
-    
     // 有氧训练
     '跑步机': exerciseTypes.CARDIO,
     '椭圆机': exerciseTypes.CARDIO,
-    
     // 默认类型
     'default': exerciseTypes.WEIGHT
 };
