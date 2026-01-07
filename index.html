@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健身记录工具</title>
     <link rel="stylesheet" href="css/style.css">
-</head>
+    <link rel="stylesheet" href="css/dataRecord.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
+</head>
 <body>
     <div class="container">
-        <!-- 导航区 -->
-        <nav class="nav">
+        <nav class="nav nav-primary">
             <button class="nav-btn" data-page="history">历史训练记录</button>
             <button class="nav-btn active" data-page="realtime">实时训练记录</button>
             <button class="nav-btn" data-page="plans">训练计划</button>
+        </nav>
+        <nav class="nav nav-secondary">
+            <button class="nav-btn" data-page="body">身材记录</button>
+            <button class="nav-btn" data-page="dietary">饮食记录</button>
         </nav>
 
         <!-- 历史训练记录页面 -->
@@ -28,8 +32,10 @@
                     </select>
                     <input type="date" id="date-filter">
                     <button id="apply-filter">应用筛选</button>
-                    <button id="export-data" class="data-btn">导出数据</button>
-                    <button id="import-data" class="data-btn">导入数据</button>
+                    <div class="data-buttons">
+                        <button id="export-data" class="data-btn">导出数据</button>
+                        <button id="import-data" class="data-btn">导入数据</button>
+                    </div>
                     <input type="file" id="file-input" accept=".json" style="display: none;">
                 </div>
             </div>
@@ -86,5 +92,200 @@
     </div>
 
     <script src="js/main.js"></script>
+
+    <!-- 身材记录页面 -->
+    <div id="body-page" class="page hidden">
+        <div class="body-record-container record-container">
+            <h2>身材记录</h2>
+            <div class="record-btn-container">
+                <button id="record-body-btn" class="record-btn">记录</button>
+            </div>
+            <div class="body-records-list records-list" id="body-records-list">
+                <!-- 身材记录将在这里动态生成 -->
+                <p class="no-data">暂无身材记录</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 身材数据记录弹窗 -->
+    <div id="body-record-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>记录身材数据</h3>
+                <span class="close" id="close-body-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="height">身高 (cm):</label>
+                    <input type="number" id="height" placeholder="请输入身高" min="100" max="250" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="weight">体重 (kg):</label>
+                    <input type="number" id="weight" placeholder="请输入体重" min="30" max="200" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="chest">胸围 (cm):</label>
+                    <input type="number" id="chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="waist">腰围 (cm):</label>
+                    <input type="number" id="waist" placeholder="请输入腰围" min="40" max="120" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="hip">臀围 (cm):</label>
+                    <input type="number" id="hip" placeholder="请输入臀围" min="60" max="150" step="0.1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-body-record" class="btn btn-cancel">取消</button>
+                <button id="confirm-body-record" class="btn btn-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 身材数据编辑弹窗 -->
+    <div id="body-edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>编辑身材数据</h3>
+                <span class="close" id="close-body-edit-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="edit-height">身高 (cm):</label>
+                    <input type="number" id="edit-height" placeholder="请输入身高" min="100" max="250" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="edit-weight">体重 (kg):</label>
+                    <input type="number" id="edit-weight" placeholder="请输入体重" min="30" max="200" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="edit-chest">胸围 (cm):</label>
+                    <input type="number" id="edit-chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="edit-waist">腰围 (cm):</label>
+                    <input type="number" id="edit-waist" placeholder="请输入腰围" min="40" max="120" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="edit-hip">臀围 (cm):</label>
+                    <input type="number" id="edit-hip" placeholder="请输入臀围" min="60" max="150" step="0.1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-body-edit" class="btn btn-cancel">取消</button>
+                <button id="confirm-body-edit" class="btn btn-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bodyRecord.js"></script>
+
+    <!-- 饮食记录页面 -->
+    <div id="dietary-page" class="page hidden">
+        <div class="dietary-record-container record-container">
+            <h2>饮食记录</h2>
+            <div class="record-btn-container">
+                <button id="record-dietary-btn" class="record-btn">记录</button>
+            </div>
+            <div class="dietary-records-list records-list" id="dietary-records-list">
+                <!-- 饮食记录将在这里动态生成 -->
+                <p class="no-data">暂无饮食记录</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 饮食信息记录弹窗 -->
+    <div id="dietary-record-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>记录饮食信息</h3>
+                <span class="close" id="close-dietary-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>时段选择 *:</label>
+                    <div class="meal-time-options">
+                        <label class="meal-option">
+                            <input type="radio" name="meal-time" value="早餐">
+                            <span class="meal-label">早餐</span>
+                        </label>
+                        <label class="meal-option">
+                            <input type="radio" name="meal-time" value="午餐">
+                            <span class="meal-label">午餐</span>
+                        </label>
+                        <label class="meal-option">
+                            <input type="radio" name="meal-time" value="晚餐">
+                            <span class="meal-label">晚餐</span>
+                        </label>
+                        <label class="meal-option">
+                            <input type="radio" name="meal-time" value="加餐">
+                            <span class="meal-label">加餐</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="food-description">食物描述:</label>
+                    <textarea id="food-description" placeholder="请输入食物描述（可选）" rows="3"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="calories">热量估算 (kcal):</label>
+                    <input type="number" id="calories" placeholder="请输入热量估算（可选）" min="0" step="1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-dietary-record" class="btn btn-cancel">取消</button>
+                <button id="confirm-dietary-record" class="btn btn-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 饮食信息编辑弹窗 -->
+    <div id="dietary-edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>编辑饮食信息</h3>
+                <span class="close" id="close-dietary-edit-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>时段选择 *:</label>
+                    <div class="meal-time-options">
+                        <label class="meal-option">
+                            <input type="radio" name="edit-meal-time" value="早餐">
+                            <span class="meal-label">早餐</span>
+                        </label>
+                        <label class="meal-option">
+                            <input type="radio" name="edit-meal-time" value="午餐">
+                            <span class="meal-label">午餐</span>
+                        </label>
+                        <label class="meal-option">
+                            <input type="radio" name="edit-meal-time" value="晚餐">
+                            <span class="meal-label">晚餐</span>
+                        </label>
+                        <label class="meal-option">
+                            <input type="radio" name="edit-meal-time" value="加餐">
+                            <span class="meal-label">加餐</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="edit-food-description">食物描述:</label>
+                    <textarea id="edit-food-description" placeholder="请输入食物描述（可选）" rows="3"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="edit-calories">热量估算 (kcal):</label>
+                    <input type="number" id="edit-calories" placeholder="请输入热量估算（可选）" min="0" step="1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-dietary-edit" class="btn btn-cancel">取消</button>
+                <button id="confirm-dietary-edit" class="btn btn-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dietaryRecord.js"></script>
+  
 </body>
 </html>
