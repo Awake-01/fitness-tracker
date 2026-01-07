@@ -24,8 +24,14 @@ body {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     overflow: hidden;
+}
+
+/* 第二行导航样式 */
+.nav-secondary {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
 }
 
 .nav-btn {
@@ -101,6 +107,14 @@ h3 {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+/* 数据按钮容器样式 */
+.data-buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
 }
 
 .filter-controls select,
