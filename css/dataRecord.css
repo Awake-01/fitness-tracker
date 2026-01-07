@@ -1,0 +1,916 @@
+/* 页面容器基础样式 */
+.record-container {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+    min-height: 600px;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.record-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #45a049, #8BC34A);
+}
+
+/* 标题通用样式 */
+.record-container h2 {
+    margin-bottom: 30px;
+    color: #2e7d32;
+    font-size: 2rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+}
+
+.record-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 2px;
+}
+
+/* 记录按钮容器 */
+.record-btn-container {
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* 记录按钮通用样式 */
+.record-btn {
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 15px rgba(76, 175, 80, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.record-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.record-btn:hover::before {
+    left: 100%;
+}
+
+.record-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 15px 40px rgba(76, 175, 80, 0.4),
+        0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.record-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 5px 20px rgba(76, 175, 80, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 记录列表容器通用样式 */
+.records-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* 记录卡片通用样式 */
+.record-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 0;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(76, 175, 80, 0.1);
+}
+
+.record-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+}
+
+.record-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 48px rgba(0, 0, 0, 0.15),
+        0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 编辑按钮通用样式 */
+.edit-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 6px rgba(76, 175, 80, 0.3);
+    z-index: 10;
+    outline: none;
+    padding: 0;
+    margin: 0 0 0 8px;
+    flex-shrink: 0;
+}
+
+.edit-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+/* 时间戳通用样式 */
+.record-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.record-time::before {
+    content: '📅';
+    font-size: 0.9rem;
+}
+
+/* 弹窗通用样式 */
+.modal {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal .modal-content {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-radius: 25px;
+    padding: 0;
+    box-shadow: 
+        0 25px 60px rgba(76, 175, 80, 0.3),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    animation: modalSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid #4CAF50;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* 弹窗头部通用样式 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 25px 30px 20px;
+    border-bottom: 2px solid #c8e6c9;
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+    border-radius: 25px 25px 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #2e7d32;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* 关闭按钮通用样式 */
+.close {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #bdc3c7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.close:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    transform: rotate(90deg);
+}
+
+/* 弹窗主体通用样式 */
+.modal-body {
+    margin-bottom: 0;
+    padding: 30px;
+}
+
+/* 输入组通用样式 */
+.modal-body .input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.modal-body .input-group:last-child {
+    margin-bottom: 0;
+}
+
+.modal-body label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.modal-body input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.modal-body input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.modal-body input::placeholder {
+    color: #bdc3c7;
+    font-style: italic;
+}
+
+/* 文本域通用样式 */
+textarea {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+textarea::placeholder {
+    color: #bdc3c7;
+    font-style: italic;
+}
+
+/* 弹窗底部通用样式 */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 20px 30px 25px;
+    border-top: 2px solid #f8f9fa;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 0 0 25px 25px;
+}
+
+/* 按钮通用样式 */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* 取消按钮通用样式 */
+.btn-cancel {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+}
+
+.btn-cancel:hover {
+    background: linear-gradient(135deg, #7f8c8d 0%, #6c7a7a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+}
+
+/* 确认按钮通用样式 */
+.btn-confirm {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-confirm:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 无数据状态通用样式 */
+.no-data {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 30px;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 2px dashed rgba(76, 175, 80, 0.3);
+}
+
+.no-data::before {
+    content: '📊';
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+/* ============================================
+   身材记录页面特定样式
+   ============================================ */
+
+/* 身材记录卡片特定样式 */
+.body-record-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 0;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+/* 身材记录编辑按钮样式 */
+.edit-body-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+/* 身材记录时间戳特定样式 */
+.body-record-time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.body-record-time::before {
+    content: '📅';
+    font-size: 0.9rem;
+}
+
+/* 身材数据网格布局 */
+.body-record-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    padding: 0;
+}
+
+/* 身材数据字段样式 */
+.body-record-field {
+    display: flex;
+    flex-direction: column;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    min-height: 60px;
+}
+
+.body-record-field:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+    border-color: #4CAF50;
+    box-shadow: 0 2px 6px rgba(76, 175, 80, 0.1);
+}
+
+/* 身材数据字段标签 */
+.body-record-label {
+    font-size: 0.7rem;
+    color: #868e96;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+}
+
+/* 身材数据字段值 */
+.body-record-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 4px;
+}
+
+/* ============================================
+   饮食记录页面特定样式
+   ============================================ */
+
+/* 饮食记录卡片特定样式 */
+.dietary-record-item {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 0;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.dietary-record-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 48px rgba(0, 0, 0, 0.15),
+        0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 饮食记录头部样式 */
+.dietary-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f8f9fa;
+    position: relative;
+}
+
+/* 饮食记录时间戳样式 */
+.dietary-record-time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    flex: 1;
+}
+
+/* 编辑按钮样式 */
+.edit-dietary-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.dietary-record-time::before {
+    content: '📅';
+    font-size: 0.9rem;
+}
+
+/* 饮食时段标签样式 */
+.meal-time-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.meal-time-badge.breakfast {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+}
+
+.meal-time-badge.lunch {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.meal-time-badge.dinner {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.meal-time-badge.snack {
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+}
+
+/* 饮食记录内容样式 */
+.dietary-record-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 食物描述样式 */
+.food-description {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #4CAF50;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #2c3e50;
+    font-style: normal;
+}
+
+/* 热量信息样式 */
+.calories-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-radius: 10px;
+    border: 1px solid #ffcc80;
+    margin-bottom: 0;
+}
+
+.calories-icon {
+    font-size: 1.2rem;
+}
+
+.calories-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #e65100;
+    letter-spacing: 0.5px;
+}
+
+/* 饮食记录头部信息 */
+.dietary-record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 饮食记录时间戳特定样式 */
+.dietary-record-time {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* 时段标签基础样式 */
+.meal-time-badge {
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-right: 0;
+    z-index: 1;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    box-shadow: 0 2px 6px rgba(76, 175, 80, 0.2);
+}
+
+/* 早餐标签 - 浅绿色 */
+.meal-time-badge.breakfast {
+    background: linear-gradient(135deg, #8BC34A 0%, #689F38 100%);
+    box-shadow: 0 2px 8px rgba(139, 195, 74, 0.3);
+}
+
+/* 午餐标签 - 中绿色 */
+.meal-time-badge.lunch {
+    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+/* 加餐标签 - 深绿色 */
+.meal-time-badge.snack {
+    background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
+    box-shadow: 0 2px 8px rgba(56, 142, 60, 0.3);
+}
+
+/* 晚餐标签 - 暗绿色 */
+.meal-time-badge.dinner {
+    background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
+/* 记录内容 */
+.dietary-record-content {
+    margin-bottom: 20px;
+}
+
+/* 食物描述 */
+.food-description {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 3px solid #4CAF50;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #2c3e50;
+}
+
+.food-description:empty {
+    display: none;
+}
+
+/* 热量信息 */
+.calories-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff3cd;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ffeeba;
+}
+
+.calories-icon {
+    font-size: 1.2rem;
+}
+
+.calories-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #856404;
+}
+
+/* 时段选择样式 */
+.meal-time-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.meal-option {
+    position: relative;
+    cursor: pointer;
+}
+
+.meal-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.meal-label {
+    display: block;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #495057;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.meal-option input[type="radio"]:checked + .meal-label {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border-color: #4CAF50;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    transform: translateY(-2px);
+}
+
+.meal-option:hover .meal-label {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    border-color: #adb5bd;
+}
+
+.meal-option input[type="radio"]:checked:hover + .meal-label {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+
+@media (max-width: 768px) {
+    .record-container {
+        padding: 30px 15px;
+    }
+
+    .record-container h2 {
+        font-size: 2rem;
+    }
+
+    .record-btn {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+    }
+
+    .record-item {
+        padding: 25px 20px;
+    }
+
+    .body-record-data {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .body-record-field {
+        padding: 15px;
+    }
+
+    .body-record-value {
+        font-size: 1.3rem;
+    }
+
+    .dietary-record-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .meal-time-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal .modal-content {
+        width: 95%;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .record-container {
+        padding: 20px 10px;
+    }
+
+    .record-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .record-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .records-list {
+        gap: 20px;
+    }
+
+    .record-item {
+        padding: 20px 15px;
+    }
+
+    .body-record-data {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .body-record-field {
+        padding: 12px;
+    }
+
+    .body-record-value {
+        font-size: 1.2rem;
+    }
+
+    .meal-time-options {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .modal-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .edit-btn {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
