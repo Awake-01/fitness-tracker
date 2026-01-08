@@ -66,11 +66,14 @@ class BodyRecordManager {
                 this.hideEditModal();
             }
         });
+
     }
 
     // 显示弹窗
     showModal() {
-        document.getElementById('body-record-modal').classList.remove('hidden');
+        const modal = document.getElementById('body-record-modal');
+        modal.classList.remove('hidden');
+        
         // 清空输入框
         this.clearInputs();
     }
@@ -82,23 +85,25 @@ class BodyRecordManager {
 
     // 清空输入框
     clearInputs() {
-        document.getElementById('height').value = '';
         document.getElementById('weight').value = '';
         document.getElementById('chest').value = '';
         document.getElementById('waist').value = '';
         document.getElementById('hip').value = '';
+        document.getElementById('upper-chest').value = '';
+        document.getElementById('lower-chest').value = '';
     }
 
     // 保存记录
     saveRecord() {
-        const height = document.getElementById('height').value;
         const weight = document.getElementById('weight').value;
         const chest = document.getElementById('chest').value;
         const waist = document.getElementById('waist').value;
         const hip = document.getElementById('hip').value;
+        const upperChest = document.getElementById('upper-chest').value;
+        const lowerChest = document.getElementById('lower-chest').value;
 
         // 验证至少填写一项
-        if (!height && !weight && !chest && !waist && !hip) {
+        if (!weight && !chest && !upperChest && !lowerChest && !waist && !hip) {
             alert('请至少填写一项身材数据！');
             return;
         }
@@ -108,9 +113,10 @@ class BodyRecordManager {
             id: Date.now().toString(),
             timestamp: new Date(),
             data: {
-                height: height ? parseFloat(height) : null,
                 weight: weight ? parseFloat(weight) : null,
                 chest: chest ? parseFloat(chest) : null,
+                upperChest: upperChest ? parseFloat(upperChest) : null,
+                lowerChest: lowerChest ? parseFloat(lowerChest) : null,
                 waist: waist ? parseFloat(waist) : null,
                 hip: hip ? parseFloat(hip) : null
             }
@@ -130,6 +136,9 @@ class BodyRecordManager {
 
         // 显示成功提示
         alert('身材数据记录成功！');
+        
+        // 触发身材数据更新事件
+        window.dispatchEvent(new Event('bodyRecordUpdated'));
     }
 
     // 加载记录
@@ -187,15 +196,7 @@ class BodyRecordManager {
         const timeStr = this.formatDateTime(record.timestamp);
         const dataFields = [];
 
-        // 只显示有数据的字段
-        if (record.data.height !== null) {
-            dataFields.push(`
-                <div class="body-record-field">
-                    <span class="body-record-label">身高</span>
-                    <span class="body-record-value">${record.data.height} cm</span>
-                </div>
-            `);
-        }
+
 
         if (record.data.weight !== null) {
             dataFields.push(`
@@ -206,11 +207,29 @@ class BodyRecordManager {
             `);
         }
 
-        if (record.data.chest !== null) {
+        if (record.data.chest !== null && record.data.chest !== undefined) {
             dataFields.push(`
                 <div class="body-record-field">
                     <span class="body-record-label">胸围</span>
                     <span class="body-record-value">${record.data.chest} cm</span>
+                </div>
+            `);
+        }
+
+        if (record.data.upperChest !== null && record.data.upperChest !== undefined) {
+            dataFields.push(`
+                <div class="body-record-field">
+                    <span class="body-record-label">上胸围</span>
+                    <span class="body-record-value">${record.data.upperChest} cm</span>
+                </div>
+            `);
+        }
+
+        if (record.data.lowerChest !== null && record.data.lowerChest !== undefined) {
+            dataFields.push(`
+                <div class="body-record-field">
+                    <span class="body-record-label">下胸围</span>
+                    <span class="body-record-value">${record.data.lowerChest} cm</span>
                 </div>
             `);
         }
@@ -278,11 +297,12 @@ class BodyRecordManager {
         this.currentEditId = recordId;
         
         // 填充表单数据
-        document.getElementById('edit-height').value = record.data.height || '';
         document.getElementById('edit-weight').value = record.data.weight || '';
         document.getElementById('edit-chest').value = record.data.chest || '';
         document.getElementById('edit-waist').value = record.data.waist || '';
         document.getElementById('edit-hip').value = record.data.hip || '';
+        document.getElementById('edit-upper-chest').value = record.data.upperChest || '';
+        document.getElementById('edit-lower-chest').value = record.data.lowerChest || '';
 
         document.getElementById('body-edit-modal').classList.remove('hidden');
     }
@@ -297,14 +317,15 @@ class BodyRecordManager {
     updateRecord() {
         if (!this.currentEditId) return;
 
-        const height = document.getElementById('edit-height').value;
         const weight = document.getElementById('edit-weight').value;
         const chest = document.getElementById('edit-chest').value;
         const waist = document.getElementById('edit-waist').value;
         const hip = document.getElementById('edit-hip').value;
+        const upperChest = document.getElementById('edit-upper-chest').value;
+        const lowerChest = document.getElementById('edit-lower-chest').value;
 
         // 验证至少填写一项
-        if (!height && !weight && !chest && !waist && !hip) {
+        if (!weight && !chest && !upperChest && !lowerChest && !waist && !hip) {
             alert('请至少填写一项身材数据！');
             return;
         }
@@ -315,9 +336,10 @@ class BodyRecordManager {
             this.records[recordIndex] = {
                 ...this.records[recordIndex],
                 data: {
-                    height: height ? parseFloat(height) : null,
                     weight: weight ? parseFloat(weight) : null,
                     chest: chest ? parseFloat(chest) : null,
+                    upperChest: upperChest ? parseFloat(upperChest) : null,
+                    lowerChest: lowerChest ? parseFloat(lowerChest) : null,
                     waist: waist ? parseFloat(waist) : null,
                     hip: hip ? parseFloat(hip) : null
                 }
@@ -334,6 +356,9 @@ class BodyRecordManager {
 
             // 显示成功提示
             alert('身材记录更新成功！');
+            
+            // 触发身材数据更新事件
+            window.dispatchEvent(new Event('bodyRecordUpdated'));
         }
     }
 }
