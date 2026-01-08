@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健身记录工具</title>
@@ -17,6 +15,7 @@
         </nav>
         <nav class="nav nav-secondary">
             <button class="nav-btn" data-page="body">身材记录</button>
+            <button class="nav-btn" data-page="profile">个人档案</button>
             <button class="nav-btn" data-page="dietary">饮食记录</button>
         </nav>
 
@@ -112,13 +111,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>记录身材数据</h3>
-                <span class="close" id="close-body-modal">&times;</span>
+                <span class="close" id="close-body-modal">×</span>
             </div>
             <div class="modal-body">
-                <div class="input-group">
-                    <label for="height">身高 (cm):</label>
-                    <input type="number" id="height" placeholder="请输入身高" min="100" max="250" step="0.1">
-                </div>
+
                 <div class="input-group">
                     <label for="weight">体重 (kg):</label>
                     <input type="number" id="weight" placeholder="请输入体重" min="30" max="200" step="0.1">
@@ -126,6 +122,18 @@
                 <div class="input-group">
                     <label for="chest">胸围 (cm):</label>
                     <input type="number" id="chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
+                </div>
+                <div class="input-group">
+                    <div class="chest-inputs-row">
+                        <div class="chest-input-half">
+                            <label for="upper-chest">上胸围 (cm):</label>
+                            <input type="number" id="upper-chest" placeholder="请输入上胸围" min="60" max="150" step="0.1">
+                        </div>
+                        <div class="chest-input-half">
+                            <label for="lower-chest">下胸围 (cm):</label>
+                            <input type="number" id="lower-chest" placeholder="请输入下胸围" min="60" max="150" step="0.1">
+                        </div>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="waist">腰围 (cm):</label>
@@ -148,13 +156,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>编辑身材数据</h3>
-                <span class="close" id="close-body-edit-modal">&times;</span>
+                <span class="close" id="close-body-edit-modal">×</span>
             </div>
             <div class="modal-body">
-                <div class="input-group">
-                    <label for="edit-height">身高 (cm):</label>
-                    <input type="number" id="edit-height" placeholder="请输入身高" min="100" max="250" step="0.1">
-                </div>
+
                 <div class="input-group">
                     <label for="edit-weight">体重 (kg):</label>
                     <input type="number" id="edit-weight" placeholder="请输入体重" min="30" max="200" step="0.1">
@@ -162,6 +167,18 @@
                 <div class="input-group">
                     <label for="edit-chest">胸围 (cm):</label>
                     <input type="number" id="edit-chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
+                </div>
+                <div class="input-group">
+                    <div class="chest-inputs-row">
+                        <div class="chest-input-half">
+                            <label for="edit-upper-chest">上胸围 (cm):</label>
+                            <input type="number" id="edit-upper-chest" placeholder="请输入上胸围" min="60" max="150" step="0.1">
+                        </div>
+                        <div class="chest-input-half">
+                            <label for="edit-lower-chest">下胸围 (cm):</label>
+                            <input type="number" id="edit-lower-chest" placeholder="请输入下胸围" min="60" max="150" step="0.1">
+                        </div>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="edit-waist">腰围 (cm):</label>
@@ -181,6 +198,170 @@
 
     <script src="js/bodyRecord.js"></script>
 
+    <!-- 个人档案页面 -->
+    <div id="profile-page" class="page hidden">
+        <div class="profile-container record-container">
+            <h2>个人档案</h2>
+            <div class="profile-info">
+                <div class="profile-section">
+                    <h3>基本信息</h3>
+                    <div class="profile-fields">
+                        <div class="profile-field">
+                            <label>性别：</label>
+                            <span id="profile-gender">未设置</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>年龄：</label>
+                            <span id="profile-age">--</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3>身体数据</h3>
+                    <div class="profile-fields">
+                        <div class="profile-field">
+                            <label>身高：</label>
+                            <span id="profile-height">--</span>
+                            <button id="edit-height-btn" class="edit-small-btn" title="编辑身高">✏️</button>
+                        </div>
+                        <div class="profile-field">
+                            <label>体重：</label>
+                            <span id="profile-weight">--</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>胸围：</label>
+                            <span id="profile-chest">--</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>腰围：</label>
+                            <span id="profile-waist">--</span>
+                        </div>
+                        <div class="profile-field">
+                            <label>臀围：</label>
+                            <span id="profile-hip">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 健康计算卡片 -->
+                <div class="profile-section">
+                    <h3>健康指数</h3>
+                    <div class="calculation-cards profile-calculation-cards">
+                        <!-- BMI计算卡片 -->
+                        <div class="calculation-card" id="bmi-card">
+                            <div class="card-header">
+                                <h3>BMI 指数</h3>
+                                <span class="card-subtitle">身体质量</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="value-display">
+                                    <span class="value-number" id="bmi-value">--</span>
+                                    <span class="value-unit">kg/m²</span>
+                                </div>
+                                <div class="status-display">
+                                    <span class="status-text" id="bmi-status">请完善个人信息</span>
+                                </div>
+                                <div class="standard-info">
+                                    <div class="standard-item">
+                                        <span class="standard-range">&lt; 18.5</span>
+                                        <span class="standard-label">偏低</span>
+                                    </div>
+                                    <div class="standard-item">
+                                        <span class="standard-range">18.5 - 23.9</span>
+                                        <span class="standard-label">正常</span>
+                                    </div>
+                                    <div class="standard-item">
+                                        <span class="standard-range">24.0 - 27.9</span>
+                                        <span class="standard-label">超重</span>
+                                    </div>
+                                    <div class="standard-item">
+                                        <span class="standard-range">≥ 28.0</span>
+                                        <span class="standard-label">肥胖</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BMR计算卡片 -->
+                        <div class="calculation-card" id="bmr-card">
+                            <div class="card-header">
+                                <h3>BMR 指数</h3>
+                                <span class="card-subtitle">基础代谢</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="value-display">
+                                    <span class="value-number" id="bmr-value">--</span>
+                                    <span class="value-unit">kcal/天</span>
+                                </div>
+                                <div class="status-display">
+                                    <span class="status-text" id="bmr-status">请完善个人信息</span>
+                                </div>
+                                <div class="standard-info">
+                                    <p class="bmr-description">基础代谢率是指人体在安静状态下消耗的最低能量</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 个人档案初始化弹窗 -->
+    <div id="profile-init-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>完善个人信息</h3>
+                <span class="close" id="close-profile-init-modal">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>性别：</label>
+                    <div class="gender-options">
+                        <label class="gender-option">
+                            <input type="radio" name="gender" value="男" checked>
+                            <span class="gender-label">男</span>
+                        </label>
+                        <label class="gender-option">
+                            <input type="radio" name="gender" value="女">
+                            <span class="gender-label">女</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="birthdate">出生年月：</label>
+                    <input type="date" id="birthdate" max="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-profile-init" class="btn btn-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 身高编辑弹窗 -->
+    <div id="edit-height-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>编辑身高</h3>
+                <span class="close" id="close-edit-height-modal">×</span>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="edit-height-input">身高 (cm)：</label>
+                    <input type="number" id="edit-height-input" placeholder="请输入身高" min="100" max="250" step="0.1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-edit-height" class="btn btn-cancel">取消</button>
+                <button id="confirm-edit-height" class="btn btn-confirm">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+
     <!-- 饮食记录页面 -->
     <div id="dietary-page" class="page hidden">
         <div class="dietary-record-container record-container">
@@ -188,9 +369,28 @@
             <div class="record-btn-container">
                 <button id="record-dietary-btn" class="record-btn">记录</button>
             </div>
-            <div class="dietary-records-list records-list" id="dietary-records-list">
-                <!-- 饮食记录将在这里动态生成 -->
-                <p class="no-data">暂无饮食记录</p>
+            
+            <!-- 今日热量统计 -->
+            <div class="today-calories-section">
+                <div class="today-calories-card">
+                    <h4>今日热量统计</h4>
+                    <div class="today-calories-display">
+                        <span class="today-calories-number" id="today-calories-number">0</span>
+                        <span class="today-calories-unit">kcal</span>
+                    </div>
+                    <div class="today-calories-info">
+                        <span class="today-calories-text">当前记录的今日总热量</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 三餐记录展示区 -->
+            <div class="dietary-records-section">
+                <h3>详细饮食记录</h3>
+                <div class="dietary-records-list records-list" id="dietary-records-list">
+                    <!-- 饮食记录将在这里动态生成 -->
+                    <p class="no-data">暂无饮食记录</p>
+                </div>
             </div>
         </div>
     </div>
@@ -200,7 +400,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>记录饮食信息</h3>
-                <span class="close" id="close-dietary-modal">&times;</span>
+                <span class="close" id="close-dietary-modal">×</span>
             </div>
             <div class="modal-body">
                 <div class="input-group">
@@ -245,7 +445,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>编辑饮食信息</h3>
-                <span class="close" id="close-dietary-edit-modal">&times;</span>
+                <span class="close" id="close-dietary-edit-modal">×</span>
             </div>
             <div class="modal-body">
                 <div class="input-group">
@@ -286,6 +486,5 @@
     </div>
 
     <script src="js/dietaryRecord.js"></script>
-  
-</body>
-</html>
+
+</body></html>
