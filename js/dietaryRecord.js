@@ -3,6 +3,7 @@ class DietaryRecordManager {
     constructor() {
         this.records = this.loadRecords();
         this.currentEditId = null;
+        
         this.init();
     }
 
@@ -10,6 +11,7 @@ class DietaryRecordManager {
     init() {
         this.bindEvents();
         this.renderRecords();
+        this.updateTodayCalories();
     }
 
     // 绑定事件
@@ -64,6 +66,11 @@ class DietaryRecordManager {
                 this.hideAddModal();
                 this.hideEditModal();
             }
+        });
+
+        // 监听身材数据更新事件
+        window.addEventListener('dietaryRecordUpdated', () => {
+            this.updateTodayCalories();
         });
     }
 
@@ -148,6 +155,9 @@ class DietaryRecordManager {
 
         // 显示成功提示
         alert('饮食记录保存成功！');
+        
+        // 触发饮食记录更新事件
+        window.dispatchEvent(new CustomEvent('dietaryRecordUpdated'));
     }
 
     // 更新记录
@@ -187,6 +197,9 @@ class DietaryRecordManager {
 
             // 显示成功提示
             alert('饮食记录更新成功！');
+            
+            // 触发饮食记录更新事件
+            window.dispatchEvent(new CustomEvent('dietaryRecordUpdated'));
         }
     }
 
@@ -207,6 +220,12 @@ class DietaryRecordManager {
     // 保存记录到localStorage
     saveRecords() {
         localStorage.setItem('dietaryRecords', JSON.stringify(this.records));
+    }
+
+    // 更新今日热量统计
+    updateTodayCalories() {
+        const todayCalories = this.getTodayTotalCalories();
+        document.getElementById('today-calories-number').textContent = todayCalories;
     }
 
     // 渲染记录列表
