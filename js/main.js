@@ -914,19 +914,6 @@ function formatDate(dateString) {
     return `${year}年${month}月${day}日`;
 }
 
-// 格式化日期显示
-function formatDateDisplay(input) {
-    if (input.value) {
-        const date = new Date(input.value);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        // 这里我们不修改input.value，因为浏览器会自动处理日期格式
-        // 但我们可以在显示时使用中文格式
-        console.log('Selected date:', `${year}年${month}月${day}日`);
-    }
-}
-
 // 导入数据
 function importData(event) {
     const file = event.target.files[0];
@@ -955,9 +942,7 @@ function importData(event) {
                 
                 alert('数据导入成功！');
                 // 重新加载页面数据
-                loadHistoryRecords();
-                loadTodayRecord();
-                loadPlans();
+                location.reload();
             }
         } catch (error) {
             alert('导入失败：文件格式错误或文件已损坏');
@@ -983,8 +968,8 @@ function validateImportedData(data) {
     
     // 检查历史记录格式
     const hasValidHistory = Object.keys(data).every(key => {
-        if (key.startsWith('fitness_')) {
-            const datePattern = /^fitness_\d{4}-\d{2}-\d{2}$/;
+        if (key.startsWith('training_')) {
+            const datePattern = /^training_\d{8}$/;
             return datePattern.test(key);
         }
         return true;
@@ -1059,7 +1044,6 @@ function exportData() {
         console.error('Export error:', error);
     }
 }
-
 
 // 启动应用
 document.addEventListener('DOMContentLoaded', initApp);
