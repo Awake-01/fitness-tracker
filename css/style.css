@@ -196,17 +196,23 @@ h3 {
 
 /* 实时训练记录页面 */
 .today-info {
+    margin-bottom: 30px;
+}
+
+.today-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
 }
 
 #current-day {
     color: #4CAF50;
     font-weight: normal;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    display: block;
 }
 
 #plan-name {
