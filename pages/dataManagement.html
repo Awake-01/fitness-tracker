@@ -11,20 +11,21 @@
     <div class="container">
         <div class="record-container">
             <h2>数据管理</h2>
+            <div style="margin-bottom: -10px;">
+                <button id="back-btn" class="record-btn" onclick="window.location.href='../index.html'">返回主页</button>
+            </div>
             
             <!-- 导入数据卡片 -->
             <div class="data-card">
-                <h3>导入数据</h3>
                 <div class="data-action">
                     <button id="import-all-data" class="record-btn">导入数据</button>
                     <input type="file" id="file-input" accept=".json" style="display: none;">
+                    <p class="data-hint" style="margin-top: -5px;">支持导入JSON格式的数据文件</p>
                 </div>
-                <p class="data-hint">支持导入JSON格式的数据文件</p>
             </div>
 
             <!-- 导出数据卡片 -->
             <div class="data-card">
-                <h3>导出数据</h3>
                 <div class="data-action">
                     <button id="export-all-data" class="record-btn">导出所有数据</button>
                 </div>
@@ -38,7 +39,6 @@
 
             <!-- 清空数据卡片 -->
             <div class="data-card">
-                <h3>清空数据</h3>
                 <div class="data-action">
                     <button id="clear-all-data" class="record-btn danger">清空所有数据</button>
                 </div>
@@ -49,14 +49,8 @@
                     <button class="data-grid-btn danger" data-type="dietary">清空饮食记录</button>
                 </div>
             </div>
-
-            <!-- 返回按钮 -->
-            <div class="back-container">
-                <button id="back-btn" class="record-btn" onclick="window.location.href='index.html'">返回主页</button>
-            </div>
         </div>
     </div>
-
     <script src="../js/dataManagement.js"></script>
 </body>
 </html>
