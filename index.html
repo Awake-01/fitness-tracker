@@ -50,8 +50,11 @@
         <!-- 实时训练记录页面 -->
         <div id="realtime-page" class="page">
             <div class="today-info">
-                <h2>今日训练 <span id="current-day"></span></h2>
-                <p id="plan-name">默认计划</p>
+                <div class="today-header">
+                    <h2>今日训练</h2>
+                    <p id="plan-name">默认计划</p>
+                </div>
+                <span id="current-day" style="font-size: 24px; text-align: left; font-weight: bold; line-height: 20px;"></span>
             </div>
             <div class="training-content" id="training-content">
                 <!-- 训练内容将在这里动态生成 -->
@@ -323,7 +326,7 @@
                     <label>性别：</label>
                     <div class="gender-options">
                         <label class="gender-option">
-                            <input type="radio" name="gender" value="男" checked>
+                            <input type="radio" name="gender" value="男" checked="">
                             <span class="gender-label">男</span>
                         </label>
                         <label class="gender-option">
