@@ -53,18 +53,18 @@
 
 /* 记录按钮通用样式 */
 .record-btn {
-    padding: 12px 35px;
-    font-size: 1rem;
-    font-weight: 500;
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
     color: white;
     background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
     border: none;
-    border-radius: 25px;
+    border-radius: 28px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 
-        0 4px 15px rgba(76, 175, 80, 0.3),
-        0 1px 3px rgba(0, 0, 0, 0.1);
+        0 6px 20px rgba(76, 175, 80, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
     margin-bottom: 30px;
@@ -86,17 +86,17 @@
 }
 
 .record-btn:hover {
-    transform: translateY(-3px) scale(1.05);
+    transform: translateY(-4px) scale(1.06);
     box-shadow: 
-        0 15px 40px rgba(76, 175, 80, 0.4),
-        0 3px 10px rgba(0, 0, 0, 0.2);
+        0 20px 50px rgba(76, 175, 80, 0.5),
+        0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .record-btn:active {
-    transform: translateY(-1px) scale(0.98);
+    transform: translateY(-2px) scale(0.97);
     box-shadow: 
-        0 5px 20px rgba(76, 175, 80, 0.3),
-        0 1px 3px rgba(0, 0, 0, 0.1);
+        0 8px 25px rgba(76, 175, 80, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* 记录列表容器通用样式 */
@@ -468,6 +468,8 @@ textarea::placeholder {
     padding: 25px;
     text-align: center;
     box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .today-calories-card h4 {
@@ -489,63 +491,132 @@ textarea::placeholder {
 .data-card {
     background: white;
     border-radius: 15px;
-    padding: 30px;
-    margin-bottom: 25px;
+    padding: 40px;
+    margin-bottom: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    text-align: left;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .data-card h3 {
     color: #2e7d32;
     font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
 }
 
 .data-action {
-    margin-bottom: 25px;
+    margin-bottom: -15px;
     text-align: center;
 }
 
 .data-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .data-grid-btn {
-    padding: 15px 20px;
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 0.95rem;
+    padding: 10px 16px;
+    font-size: 0.9rem;
     font-weight: 500;
+    color: white;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+    box-shadow: 
+        0 3px 12px rgba(76, 175, 80, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.data-grid-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.data-grid-btn:hover::before {
+    left: 100%;
 }
 
 .data-grid-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 
+        0 10px 30px rgba(76, 175, 80, 0.4),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.data-grid-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 
+        0 4px 15px rgba(76, 175, 80, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .data-grid-btn.danger {
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-    box-shadow: 0 2px 10px rgba(231, 76, 60, 0.2);
+    color: white;
+    box-shadow: 
+        0 4px 15px rgba(231, 76, 60, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .data-grid-btn.danger:hover {
-    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
+    box-shadow: 
+        0 15px 40px rgba(231, 76, 60, 0.4),
+        0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 清空数据按钮特殊样式 */
+#clear-all-data {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    box-shadow: 
+        0 4px 15px rgba(231, 76, 60, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#clear-all-data:hover {
+    box-shadow: 
+        0 15px 40px rgba(231, 76, 60, 0.4),
+        0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 返回主页按钮样式 */
+#back-btn {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+    box-shadow: 
+        0 4px 15px rgba(149, 165, 166, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#back-btn:hover {
+    box-shadow: 
+        0 15px 40px rgba(149, 165, 166, 0.4),
+        0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .data-hint {
     text-align: center;
     color: #6c757d;
     font-size: 0.9rem;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .back-container {
