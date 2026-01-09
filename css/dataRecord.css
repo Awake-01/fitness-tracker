@@ -485,6 +485,90 @@ textarea::placeholder {
     margin-bottom: 10px;
 }
 
+/* 数据管理页面样式 */
+.data-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.data-card h3 {
+    color: #2e7d32;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.data-action {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.data-grid-btn {
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+}
+
+.data-grid-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+}
+
+.data-grid-btn.danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    box-shadow: 0 2px 10px rgba(231, 76, 60, 0.2);
+}
+
+.data-grid-btn.danger:hover {
+    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
+}
+
+.data-hint {
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.back-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .data-card {
+        padding: 20px;
+    }
+    
+    .record-container {
+        padding: 20px 15px;
+    }
+}
+}
+
 .today-calories-number {
     font-size: 3rem;
     font-weight: 700;
