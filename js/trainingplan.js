@@ -25,7 +25,7 @@ const recommendedExercises = {
     biceps: { name: '肱二头', exercises: ['杠铃弯举', '哑铃交替弯举', '绳索弯举', '反握引体向上'] },
     core: { name: '核心', exercises: ['平板支撑', '侧平板支撑', '卷腹', '反向卷腹', '仰卧起坐', '俄罗斯转体', '登山跑'] },
     glutes: { name: '臀', exercises: ['杠铃深蹲', '臀桥', '腿举'] },
-    legs: { name: '腿', exercises: ['杠铃深蹲', '腿举'] },
+    legs: { name: '腿', exercises: ['杠铃深蹲', '坐姿腿屈伸', '腿举'] },
     cardio: { name: '有氧', exercises: ['跑步机', '椭圆机'] }
 };
 
