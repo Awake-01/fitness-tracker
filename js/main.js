@@ -23,6 +23,7 @@ const exerciseUnitMap = {
     '反向卷腹': exerciseTypes.COUNT,
     '仰卧起坐': exerciseTypes.COUNT,
     '俄罗斯转体': exerciseTypes.COUNT,
+    '保加利亚单腿蹲': exerciseTypes.COUNT,
     // 计时训练
     '平板支撑': exerciseTypes.TIME,
     '侧平板支撑': exerciseTypes.TIME,
