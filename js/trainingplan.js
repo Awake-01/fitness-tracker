@@ -23,8 +23,8 @@ const recommendedExercises = {
     back: { name: '背', exercises: ['引体向上', '辅助引体向上', '高位下拉', '杠铃划船', '哑铃单臂划船', '坐姿绳索划船'] },
     triceps: { name: '肱三头', exercises: ['哑铃颈后臂屈伸', '绳索三头下压', '窄距卧推'] },
     biceps: { name: '肱二头', exercises: ['杠铃弯举', '哑铃交替弯举', '绳索弯举', '反握引体向上'] },
-    core: { name: '核心', exercises: ['平板支撑', '侧平板支撑', '卷腹', '反向卷腹', '仰卧起坐', '俄罗斯转体', '登山跑'] },
-    glutes: { name: '臀', exercises: ['杠铃深蹲', '臀桥', '腿举'] },
+    core: { name: '核心', exercises: ['平板支撑', '侧平板支撑', '卷腹', '反向卷腹', '仰卧起坐', '俄罗斯转体'] },
+    glutes: { name: '臀', exercises: ['杠铃深蹲', '腿举', '保加利亚单腿蹲'] },
     legs: { name: '腿', exercises: ['杠铃深蹲', '坐姿腿屈伸', '腿举'] },
     cardio: { name: '有氧', exercises: ['跑步机', '椭圆机'] }
 };
