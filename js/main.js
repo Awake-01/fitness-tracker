@@ -31,6 +31,7 @@ const exerciseUnitMap = {
     // 有氧训练
     '跑步机': exerciseTypes.CARDIO,
     '椭圆机': exerciseTypes.CARDIO,
+    '爬楼机': exerciseTypes.CARDIO,
     // 默认类型
     'default': exerciseTypes.WEIGHT
 };
