@@ -26,7 +26,7 @@ const recommendedExercises = {
     core: { name: '核心', exercises: ['平板支撑', '侧平板支撑', '卷腹', '反向卷腹', '仰卧起坐', '俄罗斯转体'] },
     glutes: { name: '臀', exercises: ['杠铃深蹲', '腿举', '保加利亚单腿蹲'] },
     legs: { name: '腿', exercises: ['杠铃深蹲', '坐姿腿屈伸', '腿举'] },
-    cardio: { name: '有氧', exercises: ['跑步机', '椭圆机'] }
+    cardio: { name: '有氧', exercises: ['跑步机', '椭圆机', '爬楼机'] }
 };
 
 // 初始化页面
