@@ -320,6 +320,24 @@
     font-style: italic;
 }
 
+/* 确保文本域和输入框宽度一致 */
+.modal-body textarea,
+.modal-body input[type="number"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.modal-body textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
 /* 胸围输入组特殊样式 */
 .chest-input-group {
     cursor: pointer;
