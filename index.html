@@ -411,34 +411,36 @@
                 <h3>记录饮食信息</h3>
                 <span class="close" id="close-dietary-modal">×</span>
             </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <label style="display: block; margin-bottom: -5px;">时段选择 *:</label>
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 10px;">
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label style="text-align: left; margin-bottom: -15px;">时段选择 *:</label>
                 </div>
-                <div class="meal-time-options">
-                  <label class="meal-option">
-                    <input type="radio" name="meal-time" value="早餐">
-                      <span class="meal-label">早餐</span>
-                  </label>
-                  <label class="meal-option">
-                    <input type="radio" name="meal-time" value="午餐">
-                      <span class="meal-label">午餐</span>
-                  </label>
-                  <label class="meal-option">
-                    <input type="radio" name="meal-time" value="晚餐">
-                      <span class="meal-label">晚餐</span>
-                  </label>
-                  <label class="meal-option">
-                    <input type="radio" name="meal-time" value="加餐">
-                      <span class="meal-label">加餐</span>
-                  </label>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <div class="meal-time-options" style="display: flex; gap: 4px; margin-bottom: -10px;">
+                        <label class="meal-option" style="padding: 2px 4px; min-width: 45px; text-align: center; white-space: nowrap;">
+                            <input type="radio" name="meal-time" value="早餐">
+                            <span class="meal-label" style="font-size: 15px;">早餐</span>
+                        </label>
+                        <label class="meal-option" style="padding: 2px 4px; min-width: 45px; text-align: center; white-space: nowrap;">
+                            <input type="radio" name="meal-time" value="午餐">
+                            <span class="meal-label" style="font-size: 15px;">午餐</span>
+                        </label>
+                        <label class="meal-option" style="padding: 2px 4px; min-width: 45px; text-align: center; white-space: nowrap;">
+                            <input type="radio" name="meal-time" value="晚餐">
+                            <span class="meal-label" style="font-size: 15px;">晚餐</span>
+                        </label>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="food-description" style="text-align: left;">食物描述:</label>
-                    <textarea id="food-description" placeholder="请输入食物描述（可选）" rows="3"></textarea>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label for="food-description" style="text-align: left; margin-bottom: -5px;">食物描述:</label>
                 </div>
-                <div class="input-group">
-                    <label for="calories" style="text-align: left;">热量估算 (kcal):</label>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <textarea id="food-description" placeholder="请输入食物描述（可选）" rows="2"></textarea>
+                </div>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label for="calories" style="text-align: left; margin-bottom: -5px;">热量估算 (kcal):</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 0;">
                     <input type="number" id="calories" placeholder="请输入热量估算（可选）" min="0" step="1">
                 </div>
             </div>
@@ -456,34 +458,36 @@
                 <h3>编辑饮食信息</h3>
                 <span class="close" id="close-dietary-edit-modal">×</span>
             </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <label style="display: block; margin-bottom: -5px;">时段选择 *:</label>       
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 10px;">
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label style="margin-bottom: -15px; text-align: left;">时段选择 *:</label>
                 </div>
-                <div class="meal-time-options">
-                    <label class="meal-option">
-                      <input type="radio" name="edit-meal-time" value="早餐">
-                        <span class="meal-label">早餐</span>
-                    </label>
-                    <label class="meal-option">
-                      <input type="radio" name="edit-meal-time" value="午餐">
-                        <span class="meal-label">午餐</span>
-                    </label>
-                    <label class="meal-option">
-                      <input type="radio" name="edit-meal-time" value="晚餐">
-                        <span class="meal-label">晚餐</span>
-                    </label>
-                    <label class="meal-option">
-                      <input type="radio" name="edit-meal-time" value="加餐">
-                        <span class="meal-label">加餐</span>
-                    </label>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <div class="meal-time-options" style="display: flex; gap: 4px; margin-bottom: -10px;">
+                        <label class="meal-option" style="padding: 2px 4px; min-width: 45px; text-align: center; white-space: nowrap;">
+                            <input type="radio" name="edit-meal-time" value="早餐">
+                            <span class="meal-label" style="font-size: 15px;">早餐</span>
+                        </label>
+                        <label class="meal-option" style="padding: 2px 4px; min-width: 45px; text-align: center; white-space: nowrap;">
+                            <input type="radio" name="edit-meal-time" value="午餐">
+                            <span class="meal-label" style="font-size: 15px;">午餐</span>
+                        </label>
+                        <label class="meal-option" style="padding: 2px 4px; min-width: 45px; text-align: center; white-space: nowrap;">
+                            <input type="radio" name="edit-meal-time" value="晚餐">
+                            <span class="meal-label" style="font-size: 15px;">晚餐</span>
+                        </label>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="edit-food-description" style="text-align: left;">食物描述:</label>
-                    <textarea id="edit-food-description" placeholder="请输入食物描述（可选）" rows="3"></textarea>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label for="edit-food-description" style="margin-bottom: -5px; text-align: left;">食物描述:</label>
                 </div>
-                <div class="input-group">
-                    <label for="edit-calories" style="text-align: left;">热量估算 (kcal):</label>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <textarea id="edit-food-description" placeholder="请输入食物描述（可选）" rows="2"></textarea>
+                </div>
+                <div class="input-group" style="margin-bottom: 0;">
+                    <label for="edit-calories" style="margin-bottom: -5px; text-align: left;">热量估算 (kcal):</label>
+                </div>
+                <div class="input-group" style="margin-bottom: 0;">
                     <input type="number" id="edit-calories" placeholder="请输入热量估算（可选）" min="0" step="1">
                 </div>
             </div>
@@ -496,4 +500,5 @@
 
     <script src="js/dietaryRecord.js"></script>
 
-</body></html>
+</body>
+</html>
