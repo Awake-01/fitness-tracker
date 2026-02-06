@@ -129,32 +129,30 @@
             <div class="modal-body">
 
                 <div class="input-group">
-                    <label for="weight">体重 (kg):</label>
-                    <input type="number" id="weight" placeholder="请输入体重" min="30" max="200" step="0.1">
+                    <label for="weight" style="text-align: left;">体重 (kg):</label>
+                    <input type="number" id="weight" placeholder="请输入体重" min="30" max="200">
                 </div>
-                <div class="input-group">
-                    <label for="chest">胸围 (cm):</label>
-                    <input type="number" id="chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
+                <div class="input-group chest-input-group collapsed" id="chest-main-group">
+                    <label for="chest">胸围 (cm)</label>
+                    <input type="number" id="chest" placeholder="请输入胸围" min="60" max="150">
                 </div>
-                <!-- <div class="input-group">
-                    <div class="chest-inputs-row">
-                        <div class="chest-input-half">
-                            <label for="upper-chest">上胸围 (cm):</label>
-                            <input type="number" id="upper-chest" placeholder="请输入上胸围" min="60" max="150" step="0.1">
-                        </div>
-                        <div class="chest-input-half">
-                            <label for="lower-chest">下胸围 (cm):</label>
-                            <input type="number" id="lower-chest" placeholder="请输入下胸围" min="60" max="150" step="0.1">
-                        </div>
+                <div class="split-chest-input" id="chest-details-group">
+                    <div class="input-group">
+                        <label for="upper-chest" style="text-align: left;">上胸围 (cm):</label>
+                        <input type="number" id="upper-chest" placeholder="请输入上胸围" min="60" max="150">
                     </div>
-                </div> -->
-                <div class="input-group">
-                    <label for="waist">腰围 (cm):</label>
-                    <input type="number" id="waist" placeholder="请输入腰围" min="40" max="120" step="0.1">
+                    <div class="input-group">
+                        <label for="lower-chest" style="text-align: left;">下胸围 (cm):</label>
+                        <input type="number" id="lower-chest" placeholder="请输入下胸围" min="60" max="150">
+                    </div>
                 </div>
                 <div class="input-group">
-                    <label for="hip">臀围 (cm):</label>
-                    <input type="number" id="hip" placeholder="请输入臀围" min="60" max="150" step="0.1">
+                    <label for="waist" style="text-align: left;">腰围 (cm):</label>
+                    <input type="number" id="waist" placeholder="请输入腰围" min="40" max="120">
+                </div>
+                <div class="input-group">
+                    <label for="hip" style="text-align: left;">臀围 (cm):</label>
+                    <input type="number" id="hip" placeholder="请输入臀围" min="60" max="150">
                 </div>
             </div>
             <div class="modal-footer">
@@ -174,32 +172,30 @@
             <div class="modal-body">
 
                 <div class="input-group">
-                    <label for="edit-weight">体重 (kg):</label>
-                    <input type="number" id="edit-weight" placeholder="请输入体重" min="30" max="200" step="0.1">
+                    <label for="edit-weight" style="text-align: left;">体重 (kg):</label>
+                    <input type="number" id="edit-weight" placeholder="请输入体重" min="30" max="200">
                 </div>
-                <div class="input-group">
-                    <label for="edit-chest">胸围 (cm):</label>
-                    <input type="number" id="edit-chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
+                <div class="input-group chest-input-group collapsed" id="edit-chest-main-group">
+                    <label for="edit-chest">胸围 (cm)</label>
+                    <input type="number" id="edit-chest" placeholder="请输入胸围" min="60" max="150">
                 </div>
-                <!-- <div class="input-group">
-                    <div class="chest-inputs-row">
-                        <div class="chest-input-half">
-                            <label for="edit-upper-chest">上胸围 (cm):</label>
-                            <input type="number" id="edit-upper-chest" placeholder="请输入上胸围" min="60" max="150" step="0.1">
-                        </div>
-                        <div class="chest-input-half">
-                            <label for="edit-lower-chest">下胸围 (cm):</label>
-                            <input type="number" id="edit-lower-chest" placeholder="请输入下胸围" min="60" max="150" step="0.1">
-                        </div>
+                <div class="split-chest-input" id="edit-chest-details-group">
+                    <div class="input-group">
+                        <label for="edit-upper-chest" style="text-align: left;">上胸围 (cm):</label>
+                        <input type="number" id="edit-upper-chest" placeholder="请输入上胸围" min="60" max="150">
                     </div>
-                </div> -->
-                <div class="input-group">
-                    <label for="edit-waist">腰围 (cm):</label>
-                    <input type="number" id="edit-waist" placeholder="请输入腰围" min="40" max="120" step="0.1">
+                    <div class="input-group">
+                        <label for="edit-lower-chest" style="text-align: left;">下胸围 (cm):</label>
+                        <input type="number" id="edit-lower-chest" placeholder="请输入下胸围" min="60" max="150">
+                    </div>
                 </div>
                 <div class="input-group">
-                    <label for="edit-hip">臀围 (cm):</label>
-                    <input type="number" id="edit-hip" placeholder="请输入臀围" min="60" max="150" step="0.1">
+                    <label for="edit-waist" style="text-align: left;">腰围 (cm):</label>
+                    <input type="number" id="edit-waist" placeholder="请输入腰围" min="40" max="120">
+                </div>
+                <div class="input-group">
+                    <label for="edit-hip" style="text-align: left;">臀围 (cm):</label>
+                    <input type="number" id="edit-hip" placeholder="请输入臀围" min="60" max="150">
                 </div>
             </div>
             <div class="modal-footer">
