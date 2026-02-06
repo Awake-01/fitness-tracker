@@ -77,6 +77,13 @@
                 <input type="text" id="plan-name-input" placeholder="输入计划名称">
                 <button id="create-plan-btn">创建计划</button>
             </div>
+            <!-- 计划详情展示区域 -->
+            <div id="plan-details" class="plan-details hidden">
+                <h3>计划详情</h3>
+                <div id="plan-details-content">
+                    <!-- 计划详情将在这里动态生成 -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -103,7 +110,7 @@
         <div class="body-record-container record-container">
             <h2>身材记录</h2>
             <div class="record-btn-container">
-                <button id="record-body-btn" class="record-btn">记录</button>
+                <button id="record-body-btn" class="record-btn" style="font-size: 20px;">记录</button>
             </div>
             <div class="body-records-list records-list" id="body-records-list">
                 <!-- 身材记录将在这里动态生成 -->
@@ -129,7 +136,7 @@
                     <label for="chest">胸围 (cm):</label>
                     <input type="number" id="chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
                 </div>
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <div class="chest-inputs-row">
                         <div class="chest-input-half">
                             <label for="upper-chest">上胸围 (cm):</label>
@@ -140,7 +147,7 @@
                             <input type="number" id="lower-chest" placeholder="请输入下胸围" min="60" max="150" step="0.1">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="input-group">
                     <label for="waist">腰围 (cm):</label>
                     <input type="number" id="waist" placeholder="请输入腰围" min="40" max="120" step="0.1">
@@ -174,7 +181,7 @@
                     <label for="edit-chest">胸围 (cm):</label>
                     <input type="number" id="edit-chest" placeholder="请输入胸围" min="60" max="150" step="0.1">
                 </div>
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <div class="chest-inputs-row">
                         <div class="chest-input-half">
                             <label for="edit-upper-chest">上胸围 (cm):</label>
@@ -185,7 +192,7 @@
                             <input type="number" id="edit-lower-chest" placeholder="请输入下胸围" min="60" max="150" step="0.1">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="input-group">
                     <label for="edit-waist">腰围 (cm):</label>
                     <input type="number" id="edit-waist" placeholder="请输入腰围" min="40" max="120" step="0.1">
@@ -373,7 +380,7 @@
         <div class="dietary-record-container record-container">
             <h2>饮食记录</h2>
             <div class="record-btn-container">
-                <button id="record-dietary-btn" class="record-btn">记录</button>
+                <button id="record-dietary-btn" class="record-btn" style="font-size: 20px;">记录</button>
             </div>
             
             <!-- 今日热量统计 -->
@@ -493,4 +500,5 @@
 
     <script src="js/dietaryRecord.js"></script>
 
-</body></html>
+</body>
+</html>
