@@ -21,6 +21,8 @@ const exerciseUnitMap = {
     '反握引体向上': exerciseTypes.COUNT,
     '卷腹': exerciseTypes.COUNT,
     '反向卷腹': exerciseTypes.COUNT,
+    '举腿': exerciseTypes.COUNT,
+    '悬垂举腿': exerciseTypes.COUNT,
     '仰卧起坐': exerciseTypes.COUNT,
     '俄罗斯转体': exerciseTypes.COUNT,
     '保加利亚单腿蹲': exerciseTypes.COUNT,
