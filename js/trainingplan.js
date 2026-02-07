@@ -18,14 +18,14 @@ let currentPlan = {
 
 // 训练部位对应的推荐动作
 const recommendedExercises = {
-    shoulders: { name: '肩', exercises: ['杠铃肩推', '哑铃肩推', '侧平举', '前平举', '俯身飞鸟', '反向蝴蝶机', '站姿哑铃推举'] },
-    chest: { name: '胸', exercises: ['平板杠铃卧推', '上斜哑铃卧推', '平板哑铃飞鸟', '俯卧撑', '蝴蝶机夹胸', '绳索夹胸'] },
-    back: { name: '背', exercises: ['引体向上', '辅助引体向上', '高位下拉', '杠铃划船', '哑铃单臂划船', '坐姿绳索划船'] },
-    triceps: { name: '肱三头', exercises: ['哑铃颈后臂屈伸', '绳索三头下压', '窄距卧推'] },
-    biceps: { name: '肱二头', exercises: ['杠铃弯举', '哑铃交替弯举', '绳索弯举', '反握引体向上'] },
-    core: { name: '核心', exercises: ['平板支撑', '侧平板支撑', '卷腹', '反向卷腹', '仰卧起坐', '俄罗斯转体'] },
-    glutes: { name: '臀', exercises: ['杠铃深蹲', '腿举', '保加利亚单腿蹲'] },
-    legs: { name: '腿', exercises: ['杠铃深蹲', '坐姿腿屈伸', '腿举'] },
+    shoulders: { name: '肩', exercises: ['站姿杠铃肩推', '坐姿哑铃肩推', '哑铃侧平举', '哑铃前平举', '反向蝴蝶机', '绳索后束飞鸟'] },
+    chest: { name: '胸', exercises: ['平板杠铃卧推', '上斜杠铃卧推', '平板哑铃卧推', '上斜哑铃卧推', '平板哑铃飞鸟', '俯卧撑', '蝴蝶机夹胸', '绳索夹胸'] },
+    back: { name: '背', exercises: ['高位下拉', '杠铃俯身划船', '哑铃单臂划船', '坐姿绳索划船', '引体向上', '辅助引体向上'] },
+    triceps: { name: '肱三头', exercises: ['仰卧杠铃臂屈伸', '哑铃颈后臂屈伸', '绳索下压'] },
+    biceps: { name: '肱二头', exercises: ['杠铃弯举', '哑铃交替弯举', '锤式弯举', '牧师椅弯举', '绳索弯举', '反握引体向上'] },
+    core: { name: '核心', exercises: ['平板支撑', '侧平板支撑', '卷腹', '反向卷腹', '举腿', '悬垂举腿', '俄罗斯转体', '仰卧起坐'] },
+    glutes: { name: '臀', exercises: ['杠铃臀推', '保加利亚单腿蹲', '髋外展机'] },
+    legs: { name: '腿', exercises: ['杠铃深蹲', '哑铃深蹲', '腿举机', '腿屈伸机', '腿弯举机'] },
     cardio: { name: '有氧', exercises: ['跑步机', '椭圆机', '爬楼机'] }
 };
 
@@ -390,7 +390,7 @@ function toggleExercise(day, exerciseName) {
             currentPlan.exercises[day].push({
                 name: exerciseName,
                 isCardio: true,
-                duration: 30, // 默认30分钟
+                duration: 20, // 默认20分钟
                 pace: '中等' // 默认中等配速
             });
         } else {
