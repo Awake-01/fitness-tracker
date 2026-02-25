@@ -1,5 +1,5 @@
 /* 全局样式 */
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -489,4 +489,44 @@ body {
         padding: 6px 12px;
         font-size: 12px;
     }
+}
+/* 星期导航栏样式 */
+.week-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-day-btn {
+    flex: 1;
+    padding: 12px 8px;
+    margin: 0 5px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    color: #495057;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.nav-day-btn:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-day-btn.active {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
