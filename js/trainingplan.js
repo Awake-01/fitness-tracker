@@ -76,6 +76,10 @@ function updatePageDisplay() {
     
     // 更新星期设置
     updateDaySettings();
+
+    // 默认显示当天的计划
+    const today = getTodayDay();
+    switchDay(today);
 }
 
 // 更新星期设置
@@ -151,6 +155,43 @@ function setupEventListeners() {
     document.querySelector('.rename-btn').addEventListener('click', toggleRename);
     document.querySelector('.name-actions button:first-child').addEventListener('click', confirmRename);
     document.querySelector('.name-actions button:last-child').addEventListener('click', cancelRename);
+
+    // 星期导航栏切换
+    document.querySelectorAll('.nav-day-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const day = this.dataset.day;
+            switchDay(day);
+        });
+    });
+}
+
+// 切换显示的日期
+function switchDay(day) {
+    // 隐藏所有日期内容
+    document.querySelectorAll('.day-editor').forEach(editor => {
+        editor.classList.add('hidden');
+    });
+    
+    // 显示选中的日期内容
+    const selectedDayContent = document.getElementById(`day-content-${day}`);
+    if (selectedDayContent) {
+        selectedDayContent.classList.remove('hidden');
+    }
+    
+    // 更新导航按钮状态
+    document.querySelectorAll('.nav-day-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.day === day) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// 获取当天是星期几
+function getTodayDay() {
+    const days = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const today = new Date();
+    return days[today.getDay()];
 }
 
 // 切换训练日/休息日
