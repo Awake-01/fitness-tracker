@@ -40,9 +40,20 @@
                 </div>
             </div>
 
+            <!-- 星期导航栏 -->
+            <div class="week-nav">
+                <button class="nav-day-btn" data-day="星期一">一</button>
+                <button class="nav-day-btn" data-day="星期二">二</button>
+                <button class="nav-day-btn" data-day="星期三">三</button>
+                <button class="nav-day-btn" data-day="星期四">四</button>
+                <button class="nav-day-btn" data-day="星期五">五</button>
+                <button class="nav-day-btn" data-day="星期六">六</button>
+                <button class="nav-day-btn" data-day="星期日">日</button>
+            </div>
+
             <!-- 星期设置区域 -->
             <div class="week-editor">
-                <div class="day-editor" data-day="星期一">
+                <div class="day-editor" id="day-content-星期一" data-day="星期一">
                     <div class="day-header">
                         <h3>星期一</h3>
                         <div class="day-type-toggle">
@@ -83,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="day-editor" data-day="星期二">
+                <div class="day-editor hidden" id="day-content-星期二" data-day="星期二">
                     <div class="day-header">
                         <h3>星期二</h3>
                         <div class="day-type-toggle">
@@ -120,7 +131,7 @@
                     </div>
                 </div>
 
-                <div class="day-editor" data-day="星期三">
+                <div class="day-editor hidden" id="day-content-星期三" data-day="星期三">
                     <div class="day-header">
                         <h3>星期三</h3>
                         <div class="day-type-toggle">
@@ -157,7 +168,7 @@
                     </div>
                 </div>
 
-                <div class="day-editor" data-day="星期四">
+                <div class="day-editor hidden" id="day-content-星期四" data-day="星期四">
                     <div class="day-header">
                         <h3>星期四</h3>
                         <div class="day-type-toggle">
@@ -194,7 +205,7 @@
                     </div>
                 </div>
 
-                <div class="day-editor" data-day="星期五">
+                <div class="day-editor hidden" id="day-content-星期五" data-day="星期五">
                     <div class="day-header">
                         <h3>星期五</h3>
                         <div class="day-type-toggle">
@@ -231,7 +242,7 @@
                     </div>
                 </div>
 
-                <div class="day-editor" data-day="星期六">
+                <div class="day-editor hidden" id="day-content-星期六" data-day="星期六">
                     <div class="day-header">
                         <h3>星期六</h3>
                         <div class="day-type-toggle">
@@ -268,7 +279,7 @@
                     </div>
                 </div>
 
-                <div class="day-editor" data-day="星期日">
+                <div class="day-editor hidden" id="day-content-星期日" data-day="星期日">
                     <div class="day-header">
                         <h3>星期日</h3>
                         <div class="day-type-toggle">
