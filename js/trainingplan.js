@@ -18,7 +18,7 @@ let currentPlan = {
 
 // 训练部位对应的推荐动作
 const recommendedExercises = {
-    warmup: { name: '热身', exercises: ['跑步机', '椭圆机', '爬楼机'] },
+    warmup: { name: '热身', exercises: ['跑步机热身', '椭圆机热身', '爬楼机热身'] },
     shoulders: { name: '肩部', exercises: ['站姿杠铃肩推', '坐姿哑铃肩推', '哑铃侧平举', '哑铃前平举', '反向蝴蝶机', '绳索后束飞鸟'] },
     chest: { name: '胸部', exercises: ['平板杠铃卧推', '上斜杠铃卧推', '平板哑铃卧推', '上斜哑铃卧推', '平板哑铃飞鸟', '蝴蝶机夹胸', '绳索夹胸', '俯卧撑'] },
     back: { name: '背部', exercises: ['高位下拉', '杠铃俯身划船', '哑铃单臂划船', '坐姿绳索划船', '引体向上', '辅助引体向上'] },
@@ -422,7 +422,7 @@ function toggleExercise(day, exerciseName) {
         let isCardio = false;
         for (const [partKey, partData] of Object.entries(recommendedExercises)) {
             if (partData.exercises.includes(exerciseName)) {
-                isCardio = partKey === 'cardio';
+                isCardio = partKey === 'cardio'||'warmup';
                 break;
             }
         }
