@@ -422,7 +422,7 @@ function toggleExercise(day, exerciseName) {
         let isCardio = false;
         for (const [partKey, partData] of Object.entries(recommendedExercises)) {
             if (partData.exercises.includes(exerciseName)) {
-                isCardio = partKey === 'cardio'||'warmup';
+                isCardio = (partKey === 'cardio' || partKey === "warmup");
                 break;
             }
         }
